@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: sqldb
+  labels:
+    app: sqldb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sqldb
+
+  template:
+    metadata:
+      labels:
+        app: sqldb
+    spec:
+      containers:
+      - name: sqldb-container
+        image: 311124730702.dkr.ecr.us-east-1.amazonaws.com/mysql-repo:4fc9c51
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: timhortons
+        ports:
+         - containerPort: 3306
+           protocol: TCP
+      imagePullSecrets:
+          - name: secret-registry

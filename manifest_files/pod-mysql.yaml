@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sqldb
+  labels:
+    app: sqldb
+spec:
+  containers:
+    - name: sqldb-server
+      image: 311124730702.dkr.ecr.us-east-1.amazonaws.com/mysql-repo:4fc9c51
+      env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: timhortons
+          - name: MYSQL_DATABASE
+            value: employees
+      ports:
+        - containerPort: 3306
+          protocol: TCP 
+  imagePullSecrets:
+    - name: secret-registry
