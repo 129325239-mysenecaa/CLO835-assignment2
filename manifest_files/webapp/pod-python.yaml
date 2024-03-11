@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: employee
+  labels:
+    app: employee
+spec:
+  containers:
+  - name: webgreen-app
+    image: 311124730702.dkr.ecr.us-east-1.amazonaws.com/web-app-repo:ffae837
+    env:
+    - name: DBHOST
+      value: mysql.sqldb.svc.cluster.local
+    - name: DBUSER
+      value: root
+    - name: DBPWD
+      value: timhortons
+    - name: DATABASE
+      value: employees
+    - name: DBPORT
+      value: "3306"
+    - name: APP_COLOR
+      value: lime
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+  imagePullSecrets:
+    - name: secret-registry

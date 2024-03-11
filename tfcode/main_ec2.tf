@@ -40,7 +40,7 @@ resource "aws_instance" "k8s" {
   iam_instance_profile = "LabInstanceProfile"
 
   tags = {
-    project = "assignment2_clo835-namitha"
+    project = "assignment2_clo835-icmajam"
   }
 
   key_name                = "assignment2"

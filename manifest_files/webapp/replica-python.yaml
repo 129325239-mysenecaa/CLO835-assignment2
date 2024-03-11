@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: employee
+  labels:
+    app: employee
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: employee
+
+  template:
+    metadata:
+      labels:
+        app: employee
+    spec:
+      containers:
+      - name: employee
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+        image: 311124730702.dkr.ecr.us-east-1.amazonaws.com/web-app-repo:ffae837
+        env:
+        - name: DBHOST
+          value: mysql.sqldb.svc.cluster.local  
+        - name: DBUSER
+          value: root
+        - name: DBPWD
+          value: timhortons 
+        - name: DATABASE
+          value: employees
+        - name: DBPORT
+          value: "3306"
+        - name: APP_COLOR
+          value: lime
+          
+      imagePullSecrets:
+        - name: secret-registry
